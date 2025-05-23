@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Timetable with Time Range</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fff, #fed7ad);
+      color: #6d4300;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      flex-basis: 100%;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    select, input[type="text"] {
+      padding: 8px;
+      border: 2px solid #6d4300;
+      border-radius: 6px;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 200px;
+    }
+
+   button {
+  background-color: #6d4300;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.25s ease;
+  box-shadow: none;
+  min-width: 110px;
+}
+
+button:hover {
+  background-color: #563700;
+}
+
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    th, td {
+      border: 1px solid #6d4300;
+      padding: 10px;
+      min-width: 80px;
+      vertical-align: middle;
+    }
+
+    th {
+      background-color: #fed7ad;
+    }
+
+    td.task {
+      background-color: #fff3e3;
+      color: #6d4300;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+
+    .empty {
+      color: #b58b58;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Student Timetable Maker (with Time Range)</h1>
+
+  <form id="taskForm">
+    <div>
+      <label for="day">Day:</label>
+      <select id="day" required>
+        <option value="" disabled selected>Select day</option>
+        <option>Sunday</option>
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="startTime">Start Time:</label>
+      <select id="startTime" required>
+        <option value="" disabled selected>Select start time</option>
+        <option>1:00</option>
+        <option>2:00</option>
+        <option>3:00</option>
+        <option>4:00</option>
+        <option>5:00</option>
+        <option>6:00</option>
+        <option>7:00</option>
+        <option>8:00</option>
+        <option>9:00</option>
+        <option>10:00</option>
+        <option>11:00</option>
+        <option>12:00</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="startAmpm">AM/PM:</label>
+      <select id="startAmpm" required>
+        <option value="" disabled selected>Select AM/PM</option>
+        <option>AM</option>
+        <option>PM</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="endTime">End Time:</label>
+      <select id="endTime" required>
+        <option value="" disabled selected>Select end time</option>
+        <option>1:00</option>
+        <option>2:00</option>
+        <option>3:00</option>
+        <option>4:00</option>
+        <option>5:00</option>
+        <option>6:00</option>
+        <option>7:00</option>
+        <option>8:00</option>
+        <option>9:00</option>
+        <option>10:00</option>
+        <option>11:00</option>
+        <option>12:00</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="endAmpm">AM/PM:</label>
+      <select id="endAmpm" required>
+        <option value="" disabled selected>Select AM/PM</option>
+        <option>AM</option>
+        <option>PM</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="type">Type:</label>
+      <select id="type" required>
+        <option value="" disabled selected>Select type</option>
+        <option>Task</option>
+        <option>Subject</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="task">Task/Subject Name:</label>
+      <input type="text" id="task" placeholder="e.g. Math Homework" required />
+    </div>
+
+    <button type="submit">Add</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Time / Day</th>
+        <th>Sunday</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+      </tr>
+    </thead>
+    <tbody id="timetableBody">
+      <!-- Rows added dynamically -->
+    </tbody>
+  </table>
+
+<script>
+  const form = document.getElementById('taskForm');
+  const timetableBody = document.getElementById('timetableBody');
+
+  // Time slots from 12:00 AM to 11:00 PM
+  const times = [
+    "12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM",
+    "6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM",
+    "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM",
+    "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM"
+  ];
+
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  // Data structure to hold tasks:
+  // timetableData[day][time] = {type, name, rowspan}
+  let timetableData = {};
+
+  // Helper: Convert time string like "1:00 PM" to index in times array
+  function timeToIndex(timeStr) {
+    return times.indexOf(timeStr);
+  }
+
+  // Helper: Parse hour, am/pm to normalized "H:00 AM/PM"
+  function normalizeTime(hour, ampm) {
+    return hour + ":00 " + ampm;
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const day = form.day.value;
+    const startTime = normalizeTime(form.startTime.value, form.startAmpm.value);
+    const endTime = normalizeTime(form.endTime.value, form.endAmpm.value);
+    const type = form.type.value;
+    const name = form.task.value.trim();
+
+    if (!day || !startTime || !endTime || !type || !name) return;
+
+    const startIdx = timeToIndex(startTime);
+    const endIdx = timeToIndex(endTime);
+
+    // Validate time range
+    if (startIdx === -1 || endIdx === -1) {
+      alert("Invalid time selected.");
+      return;
+    }
+    if (endIdx < startIdx) {
+      alert("End time must be after start time.");
+      return;
+    }
+
+    // Initialize day if doesn't exist
+    if (!timetableData[day]) timetableData[day] = {};
+
+    // Check conflicts (optional, or just overwrite)
+    for(let i = startIdx; i <= endIdx; i++) {
+      if (timetableData[day][times[i]]) {
+        // For simplicity, overwrite. You could alert conflicts here.
+      }
+    }
+
+    // Set the task on start time with rowspan for merging
+    timetableData[day][times[startIdx]] = {
+      type,
+      name,
+      rowspan: endIdx - startIdx + 1
+    };
+
+    // Mark following times as occupied by this task with null to hide cells
+    for (let i = startIdx + 1; i <= endIdx; i++) {
+      timetableData[day][times[i]] = null;
+    }
+
+    renderTable();
+    form.reset();
+  });
+
+  function renderTable() {
+    timetableBody.innerHTML = '';
+
+    for(let i = 0; i < times.length; i++) {
+      const time = times[i];
+      const row = document.createElement('tr');
+
+      // Time column
+      const timeCell = document.createElement('td');
+      timeCell.textContent = time;
+      row.appendChild(timeCell);
+
+      days.forEach(day => {
+        const cellData = timetableData[day]?.[time];
+
+        // If cellData is null, it's merged into above cell - skip cell rendering
+        if(cellData === null) {
+          // skip adding a td to simulate merged cells vertically
+          return;
+        }
+
+        const cell = document.createElement('td');
+
+        if(cellData) {
+          // Set rowspan for merged cell
+          if(cellData.rowspan && cellData.rowspan > 1) {
+            cell.rowSpan = cellData.rowspan;
+          }
+          cell.classList.add('task');
+          const startTime = time;
+          const endIdx = i + cellData.rowspan - 1;
+          const endTime = times[endIdx];
+          cell.innerHTML = `<strong>${cellData.type} (${startTime} - ${endTime}):</strong><br>${cellData.name}`;
+        } else {
+          cell.textContent = '';
+        }
+
+        row.appendChild(cell);
+      });
+
+      timetableBody.appendChild(row);
+    }
+
+    // Show empty message if no tasks
+    const hasTasks = days.some(day => timetableData[day] && Object.values(timetableData[day]).some(t => t));
+    if(!hasTasks) {
+      timetableBody.innerHTML = `<tr><td colspan="8" class="empty">No tasks added yet.</td></tr>`;
+    }
+  }
+
+  renderTable();
+
+</script>
+
+</body>
+</html>

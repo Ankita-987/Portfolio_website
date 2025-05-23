@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ankita Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #fff, #fed7ad);
+            color: rgba(105, 44, 8, 0.9);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(119, 71, 71);
+            transition: color 0.3s ease, font-size 0.3s ease;
+        }
+
+        a:hover {
+            color: #000;
+            font-size: 1.05rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 80px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin-left: 23px;
+            margin-right: 23px;
+        }
+
+        .brand-name {
+            font-size: 1.3rem;
+            color: rgb(109, 67, 0);
+            font-weight: 600;
+            text-shadow: 0 0 10px rgb(109, 67, 0);
+        }
+
+        .firstsection {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 80px;
+            margin-bottom: 80px;
+            color: rgb(119, 71, 71);
+        }
+
+        .firstsection > div {
+            width: 40%;
+        }
+
+        .intro-text {
+            font-size: 3.4rem;
+            margin-top: 70px;
+            margin-bottom: 70px;
+        }
+
+        .intro-text span {
+            color: rgb(109, 67, 0);
+            text-shadow: 0 0 10px rgb(109, 67, 0);
+        }
+
+        .intro-image img {
+            width: 120%;
+            margin-top: 2px;
+            margin-bottom: 0;
+        }
+
+        hr {
+            background-color: rgb(105, 59, 9);
+            border: none;
+            height: 1.2px;
+            margin-top: 150px;
+            margin-bottom: 150px;
+            width: 90vw;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .secondsection {
+            width: 100vw;
+            max-width: 100vw;
+            padding-left: 40px;
+            padding-right: 40px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            color: rgba(105, 44, 8, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .subheading {
+            color: rgb(184, 184, 184);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .secondsection h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .divider-line {
+            background-color: rgb(60, 27, 6);
+            width: 100%;
+            max-width: 900px;
+            height: 2px;
+            margin-top: 22px;
+            margin-bottom: 40px;
+        }
+
+        .about-text {
+            max-width: 900px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .interests-list {
+            max-width: 900px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style-type: none;
+            padding-left: 0;
+            justify-content: flex-start;
+        }
+
+        .interests-list li {
+            background-color: rgb(109, 67, 0);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .firstsection {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .firstsection > div {
+                width: 90%;
+            }
+
+            .intro-text {
+                font-size: 2.4rem;
+                margin-top: 40px;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+
+            .intro-image img {
+                width: 80%;
+                margin-top: 20px;
+                margin-bottom: 0;
+            }
+
+            .secondsection {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        .projectsection {
+            padding-top: 60px;
+            padding-bottom: 60px;
+            padding-left: 80px;
+            padding-right: 80px;
+            color: rgba(105, 44, 8, 0.9);
+        }
+
+        .projectsection h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background-color: #fff3e3;
+            border: 1px solid rgba(105, 44, 8, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card h2 {
+            margin-bottom: 10px;
+            color: rgb(109, 67, 0);
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .project-card a {
+            text-decoration: none;
+            color: rgb(109, 67, 0);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .project-card a:hover {
+            color: black;
+        }
+
+        .contactsection {
+            padding-top: 60px;
+            padding-bottom: 60px;
+            padding-left: 20px;
+            padding-right: 20px;
+            background-color: #fff3e3;
+            color: rgba(105, 44, 8, 0.9);
+            text-align: center;
+        }
+
+        .contactsection h1 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: rgb(109, 67, 0);
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+        }
+
+        .contact-info p {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .contact-info a {
+            color: rgb(109, 67, 0);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px 15px;
+            border: 1px solid #c5a880;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            color: #4d2a00;
+        }
+
+        .contact-form button {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgb(109, 67, 0);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #4d2a00;
+        }
+
+        .footer {
+            background-color: #fff3e3;
+            text-align: center;
+            padding: 20px;
+            color: rgba(105, 44, 8, 0.9);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(105, 44, 8, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="brand-name">Ankita's Portfolio</div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Project</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="firstsection">
+            <div class="intro-text">
+                Hi, my name is <span>Ankita</span><br />
+                and I am a passionate <span>Web Developer</span>
+            </div>
+            <div class="intro-image">
+                <img src="./image/2.png" alt="Ankita's portrait" />
+            </div>
+        </section>
+
+        <hr />
+
+        <section class="secondsection" id="about">
+            <span class="subheading">Let’s explore me beyond the name</span>
+            <h1>About Me</h1>
+            <div class="divider-line"></div>
+            <p class="about-text">
+                Hello! I’m Ankita Pokharel, a passionate and detail-oriented web developer with a strong desire to learn and grow every day.
+                I enjoy crafting websites that are not only visually appealing but also intuitive and accessible.
+            </p>
+            <p class="about-text">
+                I am currently a BCA student studying at Edmark College, affiliated with Tribhuvan University (TU).
+                Balancing academics and my passion for coding has helped me develop practical skills and a disciplined approach to work.
+            </p>
+            <p class="about-text">
+                My journey into web development began as a hobby, but it quickly turned into a deep interest.
+                I have developed a solid foundation in HTML, CSS, and JavaScript, and I am continuously exploring new frameworks and tools to enhance my skills.
+            </p>
+            <p class="about-text">
+                Outside of coding, I enjoy gaming and creative arts, which inspire my innovative approach to challenges and help me think outside the box.
+                I value collaboration and am always eager to connect with like-minded individuals and teams.
+            </p>
+            <p class="about-text">
+                Looking forward, my goal is to contribute to impactful projects, build meaningful digital experiences, and continue evolving as a developer and creator.
+            </p>
+            <ul class="interests-list">
+                <li>Web Development</li>
+                <li>JavaScript & Frontend Frameworks</li>
+                <li>Responsive & Accessible Design</li>
+                <li>Creative Problem Solving</li>
+                <li>Gaming</li>
+                <li>Continuous Learning</li>
+            </ul>
+        </section>
+
+        <hr />
+
+        <section class="projectsection" id="projects">
+            <h1>My Projects</h1>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h2>Visit Nepal</h2>
+                    <p>Explore Nepal's beauty and culture using basic HTML frames.</p>
+                    <a href="./frame/index.html" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h2>E-Library for Nepali Students</h2>
+                    <p>A digital platform offering historical and educational resources, focused on Nepal’s heritage and learning materials.</p>
+                    <a href="./e-library/training2.html" target="_blank">Visit E-Library</a>
+                </div>
+                <div class="project-card">
+                    <h2>Study Timetable Planner</h2>
+                    <p>Create your weekly study plan with AM/PM time slots easily.</p>
+                    <a href="./timetable/index.html" target="_blank">Try It Now</a>
+                </div>
+            </div>
+        </section>
+
+        <hr />
+
+        <section class="contactsection" id="contact">
+            <h1>Contact Me</h1>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p><strong>Email:</strong> <a href="mailto:pokharel.anki123@gmail.com">pokharel.anki123@gmail.com</a></p>
+                    <p><strong>Facebook:</strong> <a href="https://www.facebook.com/ankita.pokharel.2025/" target="_blank">Ankita Pokharel</a></p>
+                    <p><strong>Instagram:</strong> <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=rsjrnpf" target="_blank">@ankita.pokharel</a></p>
+                    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ankita-pokharel-755a672a4" target="_blank">Ankita Pokharel</a></p>
+                </div>
+               <form id="contactForm" class="contact-form">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="text" name="subject" placeholder="Subject" required />
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+</form>
+
+<script>
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent actual submission
+        alert('Form sent!');
+        location.reload();  // Refresh page to clear form
+    });
+</script>
+                </form>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 Ankita Pokharel. All rights reserved.</p>
+        </footer>
+    </main>
+</body>
+
+</html>
